@@ -4,29 +4,38 @@
 //
 
 import java.util.Scanner;
+import java.util.Stack;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class PalindromeCheckerApp {
         public static void main(String[] args) {
-                 String originalString = "noon";
+                    String originalString = "civic";
 
-                    // Use full package name instead of import
-                    java.util.Stack<Character> stack = new java.util.Stack<>();
+                    // Create Stack (LIFO)
+                    Stack<Character> stack = new Stack<>();
 
-                    // Push characters into stack
+                    // Create Queue (FIFO)
+                    Queue<Character> queue = new LinkedList<>();
+
+                    // Enqueue and Push characters
                     for (int i = 0; i < originalString.length(); i++) {
-                        stack.push(originalString.charAt(i));
+                        char ch = originalString.charAt(i);
+                        stack.push(ch);     // LIFO
+                        queue.add(ch);      // FIFO
                     }
 
                     boolean isPalindrome = true;
 
-                    // Pop and compare
+                    // Compare dequeue (queue) with pop (stack)
                     for (int i = 0; i < originalString.length(); i++) {
-                        if (originalString.charAt(i) != stack.pop()) {
+                        if (queue.remove() != stack.pop()) {
                             isPalindrome = false;
                             break;
                         }
                     }
 
+                    // Print result
                     if (isPalindrome) {
                         System.out.println("The given string \"" + originalString + "\" is a Palindrome.");
                     } else {
