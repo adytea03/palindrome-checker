@@ -7,24 +7,35 @@ import java.util.Scanner;
 
 public class PalindromeCheckerApp {
 
-    public static void main(String[] args) {
+        public static void main(String[] args) {
 
-        // Original string
-        String originalString = "madam";
+            // Original string
+            String originalString = "radar";
 
-        // Variable to store reversed string
-        String reversedString = "";
+            // Convert string to character array
+            char[] charArray = originalString.toCharArray();
 
-        // Reverse string using for loop
-        for (int i = originalString.length() - 1; i >= 0; i--) {
-            reversedString = reversedString + originalString.charAt(i);
-        }
+            // Two-pointer approach
+            int start = 0;
+            int end = charArray.length - 1;
 
-        // Compare original and reversed string using equals()
-        if (originalString.equals(reversedString)) {
-            System.out.println("The given string \"" + originalString + "\" is a Palindrome.");
-        } else {
-            System.out.println("The given string \"" + originalString + "\" is NOT a Palindrome.");
+            boolean isPalindrome = true;
+
+            // Compare characters from start and end
+            while (start < end) {
+                if (charArray[start] != charArray[end]) {
+                    isPalindrome = false;
+                    break;
+                }
+                start++;
+                end--;
+            }
+
+            // Display result
+            if (isPalindrome) {
+                System.out.println("The given string \"" + originalString + "\" is a Palindrome.");
+            } else {
+                System.out.println("The given string \"" + originalString + "\" is NOT a Palindrome.");
+            }
         }
     }
-}
