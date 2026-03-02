@@ -6,37 +6,11 @@
 import java.util.Scanner;
 
 public class PalindromeCheckerApp {
-        static class Node {
-            char data;
-            Node next;
-
-            Node(char data) {
-                this.data = data;
-                this.next = null;
-            }
-        }
-
         public static void main(String[] args) {
 
-            String originalString = "level";
+            String originalString = "madam";
 
-            // Convert string to linked list
-            Node head = null;
-            Node tail = null;
-
-            for (int i = 0; i < originalString.length(); i++) {
-                Node newNode = new Node(originalString.charAt(i));
-                if (head == null) {
-                    head = newNode;
-                    tail = newNode;
-                } else {
-                    tail.next = newNode;
-                    tail = newNode;
-                }
-            }
-
-            // Check if palindrome
-            boolean isPalindrome = isPalindrome(head);
+            boolean isPalindrome = checkPalindrome(originalString, 0, originalString.length() - 1);
 
             if (isPalindrome) {
                 System.out.println("The given string \"" + originalString + "\" is a Palindrome.");
@@ -45,51 +19,20 @@ public class PalindromeCheckerApp {
             }
         }
 
-        // Method to check palindrome using Linked List
-        public static boolean isPalindrome(Node head) {
+        // Recursive method
+        public static boolean checkPalindrome(String str, int start, int end) {
 
-            if (head == null || head.next == null) {
+            // Base Condition: If pointers cross or meet
+            if (start >= end) {
                 return true;
             }
 
-            // Step 1: Find middle using fast & slow pointers
-            Node slow = head;
-            Node fast = head;
-
-            while (fast != null && fast.next != null) {
-                slow = slow.next;
-                fast = fast.next.next;
+            // If characters do not match
+            if (str.charAt(start) != str.charAt(end)) {
+                return false;
             }
 
-            // Step 2: Reverse second half
-            Node secondHalf = reverse(slow);
-            Node firstHalf = head;
-
-            // Step 3: Compare both halves
-            while (secondHalf != null) {
-                if (firstHalf.data != secondHalf.data) {
-                    return false;
-                }
-                firstHalf = firstHalf.next;
-                secondHalf = secondHalf.next;
-            }
-
-            return true;
-        }
-
-        // Method to reverse linked list
-        public static Node reverse(Node head) {
-            Node prev = null;
-            Node current = head;
-            Node next = null;
-
-            while (current != null) {
-                next = current.next;
-                current.next = prev;
-                prev = current;
-                current = next;
-            }
-
-            return prev;
+            // Recursive call for smaller substring
+            return checkPalindrome(str, start + 1, end - 1);
         }
     }
