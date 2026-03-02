@@ -8,22 +8,42 @@ import java.util.Scanner;
 public class PalindromeCheckerApp {
         public static void main(String[] args) {
 
-            String originalString = "A man a plan a canal Panama";
+            // Test string
+            String testString = "racecar";
 
-            // Step 1: Normalize string (remove spaces, convert to lowercase)
-            String normalizedString = originalString.replaceAll("\\s+", "").toLowerCase();
+            // Create PalindromeChecker object
+            PalindromeChecker checker = new PalindromeChecker();
 
-            // Step 2: Check palindrome using simple reverse logic
-            String reversedString = "";
-            for (int i = normalizedString.length() - 1; i >= 0; i--) {
-                reversedString += normalizedString.charAt(i);
-            }
+            // Check palindrome
+            boolean result = checker.checkPalindrome(testString);
 
-            // Step 3: Compare normalized string and reversed string
-            if (normalizedString.equals(reversedString)) {
-                System.out.println("The given string \"" + originalString + "\" is a Palindrome (ignoring spaces and case).");
+            // Print result
+            if (result) {
+                System.out.println("The string \"" + testString + "\" is a Palindrome.");
             } else {
-                System.out.println("The given string \"" + originalString + "\" is NOT a Palindrome.");
+                System.out.println("The string \"" + testString + "\" is NOT a Palindrome.");
             }
+        }
+    }
+
+    // Encapsulated PalindromeChecker class
+    class PalindromeChecker {
+
+        // Method to check palindrome using simple reverse logic
+        public boolean checkPalindrome(String str) {
+
+            if (str == null || str.length() <= 1) {
+                return true;
+            }
+
+            String reversed = "";
+
+            // Build reversed string
+            for (int i = str.length() - 1; i >= 0; i--) {
+                reversed += str.charAt(i);
+            }
+
+            // Compare original and reversed
+            return str.equals(reversed);
         }
     }
