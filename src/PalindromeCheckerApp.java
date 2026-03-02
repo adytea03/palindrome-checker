@@ -7,10 +7,6 @@ import java.util.Scanner;
 
 public class PalindromeCheckerApp {
     public static void main(String[] var0) {
-        System.out.println(" Welcome to PalindromeChecker App  ");
-        System.out.println("Application Name   : PalindromeChecker");
-        System.out.println("Application Version: 1.0.0");
-        System.out.println("This application validates whether a given string is a palindrome.");
         Scanner var1 = new Scanner(System.in);
         System.out.print("Enter a word to check if it's a palindrome: ");
         String var2 = var1.nextLine();
